@@ -36,7 +36,6 @@ app/
 	entry-client.ts     Browser entry point and hydration
 	entry-server.ts     Server-side rendering entry point
 	renderer.ts         Nitro renderer bridge
-	router.ts           File-based Vue Router configuration
 	pages/              Vue route components and Nitro API handlers
 		api/              Nitro API handlers
 	components/ui/      Local shadcn-vue component primitives

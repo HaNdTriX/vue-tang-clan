@@ -1,13 +1,13 @@
 import { createSSRApp } from "vue";
 import { renderToString } from "@vue/server-renderer";
-import { createMemoryHistory } from "vue-router";
+import { createMemoryHistory, createRouter } from "vue-router";
+import { routes } from "vue-router/auto-routes";
 import App from "./App.vue";
-import { createAppRouter } from "./router.ts";
 import clientAssets from "./entry-client.ts?assets=client";
 
 export default {
   async fetch(request: Request) {
-    const router = createAppRouter(createMemoryHistory());
+    const router = createRouter({ history: createMemoryHistory(), routes });
     const app = createSSRApp(App);
     const url = new URL(request.url);
 

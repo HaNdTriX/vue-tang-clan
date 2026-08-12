@@ -1,12 +1,19 @@
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import vueRouter from "vue-router/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
 import devtoolsJson from "vite-plugin-devtools-json";
 
 export default defineConfig({
-  plugins: [vue(), devtoolsJson(), tailwindcss(), nitro()],
+  plugins: [
+    vueRouter({ routesFolder: "app/pages" }),
+    vue(),
+    devtoolsJson(),
+    tailwindcss(),
+    nitro(),
+  ],
   environments: {
     client: {
       build: {
