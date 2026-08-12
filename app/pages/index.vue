@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import { ArrowRight, CircleCheck, LoaderCircle, Server } from "@lucide/vue";
-import { Button, buttonVariants } from "~/components/ui/button";
+import { Button, buttonVariants } from "~/app/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,7 +10,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from "~/app/components/ui/card";
 
 const message = ref("Ready to contact the server.");
 const isLoading = ref(false);

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cn } from "~/lib/utils";
+import { cn } from "~/app/lib/utils";
 import { buttonVariants } from ".";
 
 defineOptions({ inheritAttrs: false });

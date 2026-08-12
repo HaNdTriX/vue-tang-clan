@@ -39,8 +39,8 @@ app/
 	router.ts           File-based Vue Router configuration
 	pages/              Vue route components and Nitro API handlers
 		api/              Nitro API handlers
-components/ui/        Local shadcn-vue component primitives
-lib/utils.ts          Tailwind class merging utility
+	components/ui/      Local shadcn-vue component primitives
+	lib/utils.ts        Tailwind class merging utility
 public/               Static files served from the site root
 components.json       shadcn-vue registry configuration
 nitro.config.ts       Nitro server and prerender configuration
@@ -77,14 +77,14 @@ Use a method suffix such as `.get.ts`, `.post.ts`, `.put.ts`, `.patch.ts`, or `.
 
 Tailwind CSS is enabled through the Vite plugin. Use utility classes directly in Vue templates; global styles, theme tokens, and the Tailwind import live in `app/assets/style.css`.
 
-The project uses [shadcn-vue](https://www.shadcn-vue.com/) with the `reka-nova` style, stone theme, Figtree font, and Lucide icons. Components are owned locally under `components/ui`, allowing their markup and styles to evolve with the app. Import them through the `~` alias:
+The project uses [shadcn-vue](https://www.shadcn-vue.com/) with the `reka-nova` style, stone theme, Figtree font, and Lucide icons. Components are owned locally under `app/components/ui`, allowing their markup and styles to evolve with the app. Import them through the `~` alias:
 
 ```ts
-import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader } from "~/components/ui/card";
+import { Button } from "~/app/components/ui/button";
+import { Card, CardContent, CardHeader } from "~/app/components/ui/card";
 ```
 
-Use `cn()` from `~/lib/utils` when combining conditional Tailwind classes.
+Use `cn()` from `~/app/lib/utils` when combining conditional Tailwind classes.
 
 ## Build and Deploy
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue";
-import { cn } from "~/lib/utils";
+import { cn } from "~/app/lib/utils";
 
 defineOptions({ inheritAttrs: false });
 
@@ -10,8 +10,8 @@ const props = defineProps<{ class?: HTMLAttributes["class"] }>();
 <template>
   <div
     v-bind="$attrs"
-    data-slot="card-header"
-    :class="cn('grid gap-1.5 px-6 pt-6', props.class)"
+    data-slot="card-content"
+    :class="cn('px-6', props.class)"
   >
     <slot />
   </div>
