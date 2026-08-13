@@ -8,25 +8,26 @@ import devtoolsJson from "vite-plugin-devtools-json";
 
 export default defineConfig({
   plugins: [
-    vueRouter({ routesFolder: "app/pages" }),
+    vueRouter({
+      routesFolder: "app/pages",
+      exclude: ["app/pages/api/**"],
+    }),
     vue(),
     devtoolsJson(),
     tailwindcss(),
-    nitro(),
+    nitro({
+      serverDir: "app/pages",
+      prerender: {
+        routes: ["/", "/ssg"],
+      },
+    }),
   ],
   environments: {
-    client: {
+    client: { build: { rollupOptions: { input: "app/entry-client.ts" } } },
+    ssr: { build: { rollupOptions: { input: "app/entry-server.ts" } } },
+    nitro: {
       build: {
-        rollupOptions: {
-          input: "./app/entry-client.ts",
-        },
-      },
-    },
-    ssr: {
-      build: {
-        rollupOptions: {
-          input: "./app/entry-server.ts",
-        },
+        rollupOptions: { treeshake: { moduleSideEffects: () => false } },
       },
     },
   },

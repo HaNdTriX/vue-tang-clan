@@ -1,6 +1,12 @@
-# vue-tang-clan
+# Vue Tang Clan
 
-A Vue 3 application rendered by Nitro, built with Vite, and styled with Tailwind CSS and shadcn-vue primitives. Pages use Vue Router with server-side rendering and hydration in the browser.
+A compact Vue 3 and Nitro reference application. It demonstrates three useful building blocks without hiding them behind starter-kit machinery:
+
+- a Vue page rendered by Nitro for each request (`/ssr`)
+- a Vue page prerendered during the production build (`/ssg`)
+- a small Nitro API handler (`/api/hello`)
+
+Vite builds the application, Vue Router generates routes from files under `app/pages`, Tailwind styles the UI, and local shadcn-vue primitives supply the components.
 
 ## Requirements
 
@@ -16,7 +22,14 @@ pnpm install
 pnpm dev
 ```
 
-Open the local URL printed by Vite. The application includes `/`, `/hello`, and `/foo` pages, plus an `/api/hello` example endpoint.
+Open the local URL printed by Vite, then visit the examples:
+
+| Route        | What it demonstrates                                           |
+| ------------ | -------------------------------------------------------------- |
+| `/`          | A client-side request to the Nitro API handler.                |
+| `/ssr`       | Request-time HTML rendering followed by Vue hydration.         |
+| `/ssg`       | HTML generated at build time, plus local component primitives. |
+| `/api/hello` | A JSON handler that returns `{ "api": "works!" }`.             |
 
 ## Commands
 
@@ -37,38 +50,36 @@ app/
 	entry-server.ts     Server-side rendering entry point
 	renderer.ts         Nitro renderer bridge
 	pages/              Vue route components and Nitro API handlers
+		index.vue         Landing page and API request example
+		ssr.vue           Server-rendered route example
+		ssg.vue           Prerendered route and component example
 		api/              Nitro API handlers
 	components/ui/      Local shadcn-vue component primitives
 	lib/utils.ts        Tailwind class merging utility
 public/               Static files served from the site root
 components.json       shadcn-vue registry configuration
-nitro.config.ts       Nitro server and prerender configuration
-vite.config.ts        Vite and Nitro integration
+vite.config.ts        Vite, Vue Router, Tailwind, and Nitro configuration
 ```
 
 ## Routing
 
-`app/router.ts` uses Vite's `import.meta.glob` to turn every `.vue` file under `app/pages` into a Vue Router route. The route path is the file path with the `app/pages` prefix and `.vue` extension removed. A trailing `index` becomes the directory root, and bracket segments become Vue Router parameters.
+`vue-router/vite` generates Vue Router routes from `.vue` files under `app/pages`. A trailing `index` becomes the directory root, and bracket segments become Vue Router parameters.
 
 | File                       | URL          |
 | -------------------------- | ------------ |
 | `app/pages/index.vue`      | `/`          |
-| `app/pages/hello.vue`      | `/hello`     |
-| `app/pages/foo.vue`        | `/foo`       |
+| `app/pages/ssr.vue`        | `/ssr`       |
+| `app/pages/ssg.vue`        | `/ssg`       |
 | `app/pages/blog/index.vue` | `/blog`      |
 | `app/pages/users/[id].vue` | `/users/:id` |
 
 ### API Routes
 
-Nitro discovers server handlers under the directory configured by `serverDir` in `nitro.config.ts`, which is `app/pages` in this project. API handler files are not included in the Vue client router, even though they share the same parent directory.
+Nitro discovers the handler in `app/pages/api/hello.ts`. API handler files are not added to the Vue client router, even though they share the same parent directory.
 
-| Handler file                       | URL              | HTTP methods                               |
-| ---------------------------------- | ---------------- | ------------------------------------------ |
-| `app/pages/api/hello.ts`           | `/api/hello`     | Any method handled by the exported handler |
-| `app/pages/api/users.ts`           | `/api/users`     | Any method handled by the exported handler |
-| `app/pages/api/users/[id].ts`      | `/api/users/:id` | Any method handled by the exported handler |
-| `app/pages/api/users/[id].get.ts`  | `/api/users/:id` | `GET` only                                 |
-| `app/pages/api/users/[id].post.ts` | `/api/users/:id` | `POST` only                                |
+| Handler file             | URL          | HTTP methods                               |
+| ------------------------ | ------------ | ------------------------------------------ |
+| `app/pages/api/hello.ts` | `/api/hello` | Any method handled by the exported handler |
 
 Use a method suffix such as `.get.ts`, `.post.ts`, `.put.ts`, `.patch.ts`, or `.delete.ts` when an endpoint needs a method-specific handler. Without a method suffix, the exported handler receives every HTTP method and can branch on the request method when necessary.
 
@@ -85,9 +96,9 @@ import { Card, CardContent, CardHeader } from "~/app/components/ui/card";
 
 Use `cn()` from `~/app/lib/utils` when combining conditional Tailwind classes.
 
-## Build and Deploy
+## Rendering and Deployment
 
-The production build prerenders the configured `/` and `/hello` entry routes, then crawls and includes linked application routes such as `/foo`. Nitro also retains runtime handlers such as `/api/hello` in `.output/server`.
+The `nitro()` plugin in `vite.config.ts` prerenders `/` and `/ssg` during `pnpm build`. `/ssr` remains a request-time route that Nitro renders through `app/renderer.ts`, while `/api/hello` remains available as a runtime JSON endpoint.
 
 ```bash
 pnpm build

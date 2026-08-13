@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { RouterLink, RouterView } from "vue-router";
+import "./assets/style.css";
+</script>
+
 <template>
   <div class="min-h-screen bg-stone-50 text-stone-900">
     <header class="border-b border-stone-200 bg-stone-50/90 backdrop-blur">
@@ -22,16 +27,16 @@
             Home
           </RouterLink>
           <RouterLink
-            to="/hello"
+            to="/ssr"
             class="rounded-md px-3 py-2 text-stone-600 transition hover:bg-stone-200 hover:text-stone-950"
           >
-            Hello
+            SSR
           </RouterLink>
           <RouterLink
-            to="/foo"
+            to="/ssg"
             class="rounded-md px-3 py-2 text-stone-600 transition hover:bg-stone-200 hover:text-stone-950"
           >
-            Foo
+            SSG
           </RouterLink>
         </nav>
       </div>

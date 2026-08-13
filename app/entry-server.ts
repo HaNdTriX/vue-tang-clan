@@ -2,39 +2,49 @@ import { createSSRApp } from "vue";
 import { renderToString } from "@vue/server-renderer";
 import { createMemoryHistory, createRouter } from "vue-router";
 import { routes } from "vue-router/auto-routes";
-import App from "./App.vue";
 import clientAssets from "./entry-client.ts?assets=client";
+import { createHead, transformHtmlTemplate } from "@unhead/vue/server";
+import App from "./App.vue";
+import indexHTML from "./index.html?raw";
 
-export default {
-  async fetch(request: Request) {
-    const router = createRouter({ history: createMemoryHistory(), routes });
-    const app = createSSRApp(App);
-    const url = new URL(request.url);
+export async function fetch(request: Request) {
+  const app = createSSRApp(App);
+  const router = createRouter({ history: createMemoryHistory(), routes });
+  const head = createHead();
 
-    app.use(router);
-    await router.push(url.pathname);
-    await router.isReady();
+  const url = new URL(request.url);
+  const href = url.href.slice(url.origin.length);
 
-    const body = await renderToString(app);
+  app.use(router);
+  app.use(head);
 
-    return new Response(
-      `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Vue Tang Clan</title>
-    ${clientAssets.css.map((asset: { href: string }) => `<link rel="stylesheet" href="${asset.href}" />`).join("\n    ")}
-  </head>
-  <body>
-    <div id="app">${body}</div>
-    <script type="module" src="${clientAssets.entry}"></script>
-  </body>
-</html>`,
-      {
-        headers: { "content-type": "text/html;charset=utf-8" },
-      },
-    );
-  },
-};
+  await router.push(href);
+  await router.isReady();
+
+  const assets = clientAssets.merge(
+    ...(await Promise.all(
+      router.currentRoute.value.matched
+        .map((to) => to.meta.assets)
+        .filter(Boolean)
+        .map((fn) => (fn as any)().then((m: any) => m.default)),
+    )),
+  );
+
+  head.push({
+    link: [
+      ...assets.css.map((attrs: any) => ({ rel: "stylesheet", ...attrs })),
+      ...assets.js.map((attrs: any) => ({ rel: "modulepreload", ...attrs })),
+    ],
+    script: [{ type: "module", src: clientAssets.entry }],
+  });
+
+  const body = await renderToString(app);
+  const html = await transformHtmlTemplate(
+    head,
+    indexHTML.replace("<!--app-html-->", body),
+  );
+
+  return new Response(html, {
+    headers: { "Content-Type": "text/html;charset=utf-8" },
+  });
+}

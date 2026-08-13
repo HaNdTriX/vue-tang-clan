@@ -11,6 +11,9 @@ importers:
       '@lucide/vue':
         specifier: ^1.31.0
         version: 1.31.0(vue@3.5.41(typescript@7.0.2))
+      '@unhead/vue':
+        specifier: ^3.3.1
+        version: 3.3.1(@oxc-project/types@0.143.0)(lightningcss@1.33.0)(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.41(typescript@7.0.2))
       '@vue/server-renderer':
         specifier: ^3.5.41
         version: 3.5.41
@@ -470,6 +473,48 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@unhead/bundler@3.3.1':
+    resolution: {integrity: sha512-F9gEgqpUKqHFzOv+7Pgm3TbmXhUdLX+WjZiPAK/huLDzblzZmvAUE9vRDymWaOST7jqGT/tPKkwl2kqbgb3nPw==}
+    peerDependencies:
+      '@unhead/cli': ^3.3.1
+      '@vitejs/devtools-kit': ^0.4.1
+      esbuild: '>=0.17.0'
+      lightningcss: '>=1.20.0'
+      oxc-parser: '>=0.98.0'
+      rolldown: '>=1.0.0'
+      unhead: ^3.3.1
+      vite: '>=6.4.2'
+      webpack: '>=5.0.0'
+    peerDependenciesMeta:
+      '@unhead/cli':
+        optional: true
+      '@vitejs/devtools-kit':
+        optional: true
+      esbuild:
+        optional: true
+      lightningcss:
+        optional: true
+      oxc-parser:
+        optional: true
+      rolldown:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+
+  '@unhead/vue@3.3.1':
+    resolution: {integrity: sha512-iS+eiE1NehbV/eF7wzR7UUuUVTv8fIphFOCekQvEMuPqfKPCB8f3wf7sgPgUngYX6mdgM6PmkGmaOQgTBxqwbw==}
+    peerDependencies:
+      vite: '>=6.4.2'
+      vue: '>=3.5.18'
+      webpack: '>=5.0.0'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+      webpack:
+        optional: true
+
   '@vitejs/plugin-vue@6.0.8':
     resolution: {integrity: sha512-0ZjgOg7oO6farnNGup7yvoM/YXZV84OZxHAwtflItNa/6zzQyVb5LNxyea3FEKEX2XlagIKzrlH7wwxkKgtiew==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -858,6 +903,9 @@ packages:
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
+  magic-string@1.1.1:
+    resolution: {integrity: sha512-qFemKPzc3ttrYVaMmnSkGtGc5nE6Ncl4bj7c9IE6C9OUIRXjf6PzJ+UZ1xhVIjYc7dolHq3qKzpAJPZUbvNj+A==}
+
   mlly@1.8.2:
     resolution: {integrity: sha512-d+ObxMQFmbt10sretNDytwt85VrbkhhUA/JBGm1MPaWJ65Cl4wOgLaB1NYvJSZ0Ef03MMEU/0xpPMXUIQ29UfA==}
 
@@ -914,6 +962,20 @@ packages:
 
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
+
+  oxc-walker@1.1.1:
+    resolution: {integrity: sha512-Hwd7dq28zu/Er99+bpWp16CGwFrhyalJh0W3JOB7XpPvgWo3MqMi2ksWGKuzzA9zt50mJ2pIUwR5lpAdZ9ACNQ==}
+    peerDependencies:
+      '@oxc-project/types': '>=0.98.0'
+      oxc-parser: '>=0.98.0'
+      rolldown: '>=1.0.0'
+    peerDependenciesMeta:
+      '@oxc-project/types':
+        optional: true
+      oxc-parser:
+        optional: true
+      rolldown:
+        optional: true
 
   pathe@2.0.3:
     resolution: {integrity: sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==}
@@ -1003,6 +1065,14 @@ packages:
 
   unenv@2.0.0-rc.24:
     resolution: {integrity: sha512-i7qRCmY42zmCwnYlh9H2SvLEypEFGye5iRmEMKjcGi7zk9UquigRjFtTLz0TYqr0ZGLZhaMHl/foy1bZR+Cwlw==}
+
+  unhead@3.3.1:
+    resolution: {integrity: sha512-eqHlbLyuvIXw898WopQmosTml4PdYW5ZhXDom/sf7ysAqQB9uvYrw2/dNvbrmkJTufSkmNmgGCjoQcvoT2mS/A==}
+    peerDependencies:
+      vite: '>=6.4.2'
+    peerDependenciesMeta:
+      vite:
+        optional: true
 
   unplugin-utils@0.3.2:
     resolution: {integrity: sha512-xVToRh2CTmLk2HnEG7ac4rl1MJTT3RFkpS8B++/SnB0kXvuaavD+n3m/vrzyWQOdJNSZQACnbz01pnppbwV5BA==}
@@ -1493,6 +1563,47 @@ snapshots:
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
 
+  '@unhead/bundler@3.3.1(@oxc-project/types@0.143.0)(lightningcss@1.33.0)(rolldown@1.2.3)(unhead@3.3.1(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))':
+    dependencies:
+      magic-string: 1.1.1
+      oxc-walker: 1.1.1(@oxc-project/types@0.143.0)(rolldown@1.2.3)
+      unhead: 3.3.1(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))
+    optionalDependencies:
+      lightningcss: 1.33.0
+      rolldown: 1.2.3
+      vite: 8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0)
+    transitivePeerDependencies:
+      - '@farmfe/core'
+      - '@oxc-project/types'
+      - '@rspack/core'
+      - bun-types-no-globals
+      - rollup
+      - unloader
+
+  '@unhead/vue@3.3.1(@oxc-project/types@0.143.0)(lightningcss@1.33.0)(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.41(typescript@7.0.2))':
+    dependencies:
+      '@unhead/bundler': 3.3.1(@oxc-project/types@0.143.0)(lightningcss@1.33.0)(rolldown@1.2.3)(unhead@3.3.1(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0)))(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))
+      hookable: 6.1.1
+      unhead: 3.3.1(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))
+      unplugin: 3.3.0(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))
+      vue: 3.5.41(typescript@7.0.2)
+    optionalDependencies:
+      vite: 8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0)
+    transitivePeerDependencies:
+      - '@farmfe/core'
+      - '@oxc-project/types'
+      - '@rspack/core'
+      - '@unhead/cli'
+      - '@vitejs/devtools-kit'
+      - bun-types-no-globals
+      - esbuild
+      - lightningcss
+      - oxc-parser
+      - rolldown
+      - rollup
+      - unloader
+
   '@vitejs/plugin-vue@6.0.8(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.41(typescript@7.0.2))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
@@ -1794,6 +1905,10 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  magic-string@1.1.1:
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.5
+
   mlly@1.8.2:
     dependencies:
       acorn: 8.18.0
@@ -1867,6 +1982,11 @@ snapshots:
   ofetch@2.0.0-alpha.3: {}
 
   ohash@2.0.11: {}
+
+  oxc-walker@1.1.1(@oxc-project/types@0.143.0)(rolldown@1.2.3):
+    optionalDependencies:
+      '@oxc-project/types': 0.143.0
+      rolldown: 1.2.3
 
   pathe@2.0.3: {}
 
@@ -1987,6 +2107,22 @@ snapshots:
   unenv@2.0.0-rc.24:
     dependencies:
       pathe: 2.0.3
+
+  unhead@3.3.1(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0)):
+    dependencies:
+      hookable: 6.1.1
+      unplugin: 3.3.0(rolldown@1.2.3)(vite@8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))
+    optionalDependencies:
+      vite: 8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0)
+    transitivePeerDependencies:
+      - '@farmfe/core'
+      - '@rspack/core'
+      - bun-types-no-globals
+      - esbuild
+      - rolldown
+      - rollup
+      - unloader
+      - webpack
 
   unplugin-utils@0.3.2:
     dependencies:

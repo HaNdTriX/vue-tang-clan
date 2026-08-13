@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Box, Palette, Sparkles } from "@lucide/vue";
+import { useHead } from "@unhead/vue";
 import { Button } from "~/app/components/ui/button";
 import {
   Card,
@@ -8,6 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "~/app/components/ui/card";
+
+useHead({
+  title: "Static example",
+});
 
 const examples = [
   {
@@ -37,14 +42,14 @@ const examples = [
       <p
         class="text-sm font-semibold uppercase tracking-[0.16em] text-teal-700"
       >
-        Component examples
+        Static generation
       </p>
       <h1 class="mt-3 text-4xl font-semibold tracking-tight">
-        Hello, shadcn-vue.
+        Build once, serve quickly.
       </h1>
       <p class="mt-4 text-lg leading-8 text-muted-foreground">
-        The starter now includes local shadcn-vue primitives powered by Tailwind
-        CSS and Lucide icons.
+        This route is prerendered during <code>pnpm build</code>. It also
+        doubles as a compact tour of the local shadcn-vue primitives.
       </p>
     </div>
 
@@ -58,11 +63,16 @@ const examples = [
       </Card>
     </div>
 
-    <div class="mt-10 flex flex-wrap gap-3">
-      <Button>Primary action</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
+    <div class="mt-10 border-t pt-8">
+      <p class="mb-4 text-sm font-medium text-muted-foreground">
+        Button variants remain interactive after the static HTML hydrates.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <Button>Primary action</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="ghost">Ghost</Button>
+      </div>
     </div>
   </section>
 </template>

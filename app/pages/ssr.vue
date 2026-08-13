@@ -14,7 +14,7 @@ import {
 import { useHead } from "@unhead/vue";
 
 useHead({
-  title: "Vue Tang Clan",
+  title: "SSR example",
 });
 
 const message = ref("Ready to contact the server.");
@@ -43,16 +43,17 @@ async function callHello() {
       <p
         class="mb-4 text-sm font-semibold uppercase tracking-[0.16em] text-teal-700"
       >
-        Vue 3 + Nitro
+        SSR
       </p>
       <h1
         class="text-4xl font-semibold tracking-tight text-balance sm:text-5xl"
       >
-        A practical starting point for Vue on Nitro.
+        Render the first view on the server.
       </h1>
       <p class="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
-        Explore a prerendered page, a server-rendered page, and a small API
-        route in one deliberately compact application.
+        Nitro renders this route into HTML for the request. Vue then hydrates
+        the same markup in the browser, ready for interactions such as the API
+        call.
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
         <Button type="button" :disabled="isLoading" @click="callHello">
@@ -60,8 +61,8 @@ async function callHello() {
           <Server v-else class="size-4" />
           {{ isLoading ? "Contacting API" : "Call the API" }}
         </Button>
-        <RouterLink :class="buttonVariants({ variant: 'outline' })" to="/ssr">
-          Compare rendering modes
+        <RouterLink :class="buttonVariants({ variant: 'outline' })" to="/ssg">
+          Explore components
           <ArrowRight class="size-4" />
         </RouterLink>
       </div>
@@ -71,12 +72,12 @@ async function callHello() {
       <CardHeader class="border-b bg-muted/30">
         <div class="flex items-center gap-2 text-sm font-medium text-teal-700">
           <CircleCheck class="size-4" />
-          API example
+          SSR lifecycle
         </div>
-        <CardTitle class="text-xl">A live Nitro handler</CardTitle>
+        <CardTitle class="text-xl">HTML first, interactivity next</CardTitle>
         <CardDescription
-          >Send a browser request to <code>/api/hello</code> after the page
-          hydrates.</CardDescription
+          >The initial page is rendered by Nitro before Vue takes over in the
+          browser.</CardDescription
         >
       </CardHeader>
       <CardContent class="py-6">
@@ -89,7 +90,7 @@ async function callHello() {
       <CardFooter
         class="border-t bg-muted/20 pt-6 text-sm text-muted-foreground"
       >
-        Use this as a small reference for client-side data fetching.
+        The request below runs client-side after hydration.
       </CardFooter>
     </Card>
   </section>

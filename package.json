@@ -2,10 +2,11 @@
   "name": "vue-tang-clan",
   "type": "module",
   "scripts": {
-    "build": "vite build && cp node_modules/.nitro/vite/services/ssr/__fullstack_assets_manifest.js .output/server/",
+    "build": "vite build",
     "dev": "vite dev",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@lucide/vue": "^1.31.0",
+    "@unhead/vue": "^3.3.1",
     "@vue/server-renderer": "^3.5.41",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
