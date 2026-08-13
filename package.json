@@ -6,7 +6,8 @@
     "dev": "vite dev",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "shadcn": "pnpm dlx shadcn-ui@latest"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
