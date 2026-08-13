@@ -14,7 +14,7 @@ import {
 import { useHead } from "@unhead/vue";
 
 useHead({
-  title: "Vue Tang Clan",
+  title: "vuetro",
 });
 
 const message = ref("Ready to contact the server.");

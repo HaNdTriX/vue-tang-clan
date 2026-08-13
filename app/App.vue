@@ -14,7 +14,7 @@ import "./assets/style.css";
           class="flex items-center gap-2 text-lg font-bold tracking-wide text-teal-800"
         >
           <img src="/favicon.svg" alt="" class="size-7" />
-          Vue Tang Clan
+          vuetro
         </RouterLink>
         <nav
           aria-label="Main navigation"

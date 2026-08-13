@@ -1,5 +1,5 @@
 {
-  "name": "vue-tang-clan",
+  "name": "vuetro",
   "type": "module",
   "scripts": {
     "build": "vite build",

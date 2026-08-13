@@ -1,4 +1,4 @@
-# Vue Tang Clan
+# vuetro
 
 A compact Vue 3 and Nitro reference application. It demonstrates three useful building blocks without hiding them behind starter-kit machinery:
 
