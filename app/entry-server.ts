@@ -8,6 +8,13 @@ import App from "./App.vue";
 import indexHTML from "./index.html?raw";
 
 export async function fetch(request: Request) {
+  if (request.method !== "GET" && request.method !== "HEAD") {
+    return new Response("Method Not Allowed", {
+      status: 405,
+      headers: { Allow: "GET, HEAD" },
+    });
+  }
+
   const app = createSSRApp(App);
   const router = createRouter({ history: createMemoryHistory(), routes });
   const head = createHead();
@@ -20,6 +27,12 @@ export async function fetch(request: Request) {
 
   await router.push(href);
   await router.isReady();
+
+  const isNotFoundRoute = router.currentRoute.value.name === "/[...path]";
+
+  if (router.currentRoute.value.matched.length === 0) {
+    return new Response("Not Found", { status: 404 });
+  }
 
   const assets = clientAssets.merge(
     ...(await Promise.all(
@@ -44,7 +57,8 @@ export async function fetch(request: Request) {
     indexHTML.replace("<!--app-html-->", body),
   );
 
-  return new Response(html, {
+  return new Response(request.method === "HEAD" ? null : html, {
+    status: isNotFoundRoute ? 404 : 200,
     headers: { "Content-Type": "text/html;charset=utf-8" },
   });
 }
